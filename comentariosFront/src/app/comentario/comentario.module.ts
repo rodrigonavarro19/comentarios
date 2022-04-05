@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ComentarioRoutingModule } from './comentario-routing.module';
 import { ComentariosListaComponent } from './pages/comentarios-lista/comentarios-lista.component';
+import { PrimengModule } from '../primeng/primeng.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ComentariosListaComponent } from './pages/comentarios-lista/comentarios
   ],
   imports: [
     CommonModule,
-    ComentarioRoutingModule
+    ComentarioRoutingModule,
+    PrimengModule
   ]
 })
 export class ComentarioModule { }
