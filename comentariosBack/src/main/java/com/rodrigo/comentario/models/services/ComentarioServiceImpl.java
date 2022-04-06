@@ -48,4 +48,9 @@ public class ComentarioServiceImpl implements IComentarioService {
 		 return comentarioDao.findById(id).orElse(null);
 	}
 
+	@Override
+	public Region findRegionById(Long id) {
+		return comentarioDao.findRegionById(id);
+	}
+
 }

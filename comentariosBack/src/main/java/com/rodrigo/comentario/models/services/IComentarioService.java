@@ -16,5 +16,7 @@ public interface IComentarioService {
 	public void delete(Long id);
 	
 	public List<Region> findAllRegiones();
+	
+	public Region findRegionById(Long id);
 
 }

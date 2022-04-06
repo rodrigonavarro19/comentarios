@@ -1,5 +1,6 @@
 package com.rodrigo.comentario.controllers;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,20 +48,27 @@ public class ComentarioRestController {
 	public ResponseEntity<?> create(@RequestBody Comentario comentario){
 		Map<String, Object> response = new HashMap<>();
 		Comentario comentarioNew = null;
+		Date date = new Date();
+		comentario.setCreateAt(date);
 		
 		try {
 		comentarioNew = comentarioService.save(comentario);
 		}catch(DataAccessException e) {
-			response.put("mensaje", "El Comentario no se ha podido guardar en la base de datos");
+			response.put("estado", false);
+			response.put("mensaje", "El comentario no se ha podido guardar en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El Comentario ha sido creado con exito!");
+		Region region = comentarioService.findRegionById(comentarioNew.getRegion().getId());
+		comentarioNew.setRegion(region);
+		
+		response.put("estado", true);
+		response.put("mensaje", "El comentario ha sido creado con exito!");
 		response.put("comentario", comentarioNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);		
 	} 
-	@PutMapping("update/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update( @RequestBody Comentario comentario, @PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 		
@@ -82,13 +90,17 @@ public class ComentarioRestController {
 			comentarioActualizado = comentarioService.save(comentarioActual);
 			
 		}catch (DataAccessException e) {
+			response.put("estado", false);
 			response.put("mensaje", "Error al actualizar el comentario en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
-		response.put("mensaje", "El cliente ha sido actualizado con éxito!");
+		Region region = comentarioService.findRegionById(comentarioActualizado.getRegion().getId());
+		comentarioActualizado.setRegion(region);
+		response.put("estado", true);
+		response.put("mensaje", "El comentario ha sido actualizado con éxito!");
 		response.put("comentario", comentarioActualizado);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
@@ -102,11 +114,12 @@ public class ComentarioRestController {
 			comentarioService.delete(id);
 			
 		}catch(DataAccessException e) {
+			response.put("estado", false);
 			response.put("mensaje", "Error al eliminar el comentario de la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+		response.put("estado", true);
 		response.put("mensaje", "Comentario eliminado con éxito!");
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}

@@ -13,5 +13,8 @@ public interface IComentarioDao extends JpaRepository<Comentario, Long>{
 	
 	@Query("from Region")
 	public List<Region> findAllRegiones();
+	
+	@Query("from Region r where r.id = :id")
+	public Region findRegionById(Long id);
 
 }
