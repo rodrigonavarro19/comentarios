@@ -25,8 +25,8 @@ INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`)
 INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (8,'Comentario 8','2022-04-05','correo8@gmail.com',9);
 INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (9,'Comentario 9','2022-04-05','correo9@gmail.com',13);
 INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (10,'Comentario 10','2022-04-05','correo10@gmail.com',13);
-INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (11,'Comentario 10','2022-04-05','correo11@gmail.com',11);
-INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (12,'Comentario 10','2022-04-05','correo12@gmail.com',10);
-INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (13,'Comentario 10','2022-04-05','correo13@gmail.com',10);
-INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (14,'Comentario 10','2022-04-05','correo14@gmail.com',3);
-INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (15,'Comentario 10','2022-04-05','correo15@gmail.com',3);
+INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (11,'Comentario 11','2022-04-05','correo11@gmail.com',11);
+INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (12,'Comentario 12','2022-04-05','correo12@gmail.com',10);
+INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (13,'Comentario 13','2022-04-05','correo13@gmail.com',10);
+INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (14,'Comentario 14','2022-04-05','correo14@gmail.com',3);
+INSERT INTO `comentarios`(`id`, `comentario`, `create_at`, `email`, `region_id`) VALUES (15,'Comentario 15','2022-04-05','correo15@gmail.com',3);
