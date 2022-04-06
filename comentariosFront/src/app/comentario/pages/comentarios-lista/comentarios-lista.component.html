@@ -1,1 +1,113 @@
-<p>comentarios-lista works!</p>
+<p-toast></p-toast>
+
+<div class="card">
+
+    <app-header (nuevo)="nuevo()"></app-header>
+
+<p-table #dt [value]="comentarios"
+             [rows]="10" 
+             [paginator]="true" 
+             [globalFilterFields]="['name','country.name','representative.name','status']" 
+             responsiveLayout="scroll"
+             [rowHover]="true" 
+             dataKey="id"
+             [loading]="loanding"
+             currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} comentarios" 
+             [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Lista de Comentarios</h5>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="comentario">Comentario <p-sortIcon field="comentario"></p-sortIcon></th>
+                <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+                <th pSortableColumn="region.nombre">Región <p-sortIcon field="region.nombre"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-comentario>
+            <tr>
+                
+                <td>{{comentario.comentario}}</td>
+                <td>{{comentario.email}}</td>
+                <td>{{comentario.region.nombre}}</td>
+                <td>
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editar(comentario)"></button>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="eliminar(comentario)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                En total hay {{comentarios ? comentarios.length : 0 }} comentarios.
+            </div>
+        </ng-template>
+
+    </p-table>
+
+</div>
+
+<form (ngSubmit) = "submit()" autocomplete="off" [formGroup]="miFormulario">
+    <p-dialog [(visible)]="dialog" 
+              [style]="{width: '700px', height:'700px'}" 
+              header="Detalle comentario" 
+              [modal]="true" 
+              styleClass="p-fluid">
+              
+            <ng-template pTemplate="content">
+        
+            <div class="field">
+                <label for="comentario">Comentario</label>
+                <input type="text"
+                       formControlName="comentario" 
+                       pInputText 
+                       id="comentario"  
+                       required 
+                       autofocus/>
+                <small class="p-error" *ngIf="campoNoValido('comentario')">El Comentario es requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="region">Región</label>
+                <p-dropdown [options]="regiones" 
+                            optionLabel="nombre" 
+                            optionValue="id" 
+                            placeholder="Seleccione"
+                            [virtualScroll]="true" 
+                            formControlName="region">
+                </p-dropdown>
+                <small class="p-error" *ngIf="campoNoValido('region')">La región es requerida</small>
+                
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <textarea formControlName="email" 
+                          id="email" 
+                          pInputTextarea  
+                          required 
+                          rows="3" 
+                          cols="20">
+                </textarea>
+                <small class="p-error" *ngIf="campoNoValido('email')">El email es requerido o no es valido</small>
+            </div>
+        
+        
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" type="submit" [disabled]="miFormulario.invalid"></button>
+        </ng-template>
+    
+        </p-dialog>
+    </form>
+
+
+<p-confirmDialog [style]="{width: '450px'}" acceptLabel="Si" rejectLabel="No"></p-confirmDialog>
+

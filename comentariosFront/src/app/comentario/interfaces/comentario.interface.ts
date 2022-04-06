@@ -5,7 +5,7 @@ export interface Comentario {
     email:      string;
     comentario: string;
     region:     Region;
-    createAt:   Date;
+    createAt?:   Date;
 }
 
  

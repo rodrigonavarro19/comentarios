@@ -22,8 +22,8 @@ export class ComentarioApiService {
     return this.http.get<Region[]>(`${this.baseUrl}regiones`);
   }
 
-  public getComentarios():Observable<Comentario>{
-    return this.http.get<Comentario>(`${this.baseUrl}listar`);
+  public getComentarios():Observable<Comentario[]>{
+    return this.http.get<Comentario[]>(`${this.baseUrl}listar`);
   }
 
   public postComentario(comentario: Comentario):Observable<ResponsePostComentario>{
